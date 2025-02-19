@@ -1,10 +1,20 @@
 
 
-
 const list = document.querySelector("#taskList");
 const input = document.querySelector("#taskInput");
 const btn = document.querySelector("#btn");
 const table = document.querySelector("#tableBody");
+
+
+document.getElementById("taskInput").addEventListener("change", function () {
+  let fileNameDisplay = document.getElementById("fileName");
+  if (this.files.length > 0) {
+      fileNameDisplay.textContent = this.files[0].name;
+  } else {
+      fileNameDisplay.textContent = "No file chosen";
+  }
+});
+
 
 function addTodo(taskData) {
   
@@ -14,7 +24,6 @@ function addTodo(taskData) {
 
 
   const tr = document.createElement("tr");
-  tr.setAttribute("data-id", taskData.id); //
 
 
   //***************** created a checkbox ********************************//
@@ -50,7 +59,7 @@ function addTodo(taskData) {
   tdStatus.appendChild(statusElement);
   tr.appendChild(tdStatus);
 
-
+  
 
   // *********************** created Modified_at *****************************//
   const tdDate = document.createElement("td");
@@ -112,28 +121,22 @@ document.querySelector(".close-btn").addEventListener("click", () => {
 
 
 //*********** delete *************/
-// ***************** delete functionality ********************************//
 document.querySelector("table").addEventListener("click", (event) => {
   if (event.target.closest(".lastColDeleteBtn")) {
-    event.stopPropagation();
+      event.stopPropagation();
+      
+      let row = event.target.closest("tr");
+      let fileName = row.querySelector(".d-name").innerText; 
 
-    let row = event.target.closest("tr");
-    let taskId = Number(row.getAttribute("data-id")); // Ensure it's a number
+      //****************** remove the row from UI *****************//
+      row.remove();
 
-    // Remove the row from the UI
-    row.remove();
-
-    // Remove the task from localStorage
-    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    let updatedTasks = tasks.filter(task => task.id !== taskId); // Convert to number and filter
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-
-    if (document.querySelector("table tbody").children.length === 0) {
-      document.querySelector(".main-table").style.display = "none";
-    }
+      // ********************** remove from localStorage*************//
+      let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      tasks = tasks.filter(task => task.fileName !== fileName);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
   }
 });
-
 
 
  
@@ -159,7 +162,6 @@ document.querySelector(".submit-btn").addEventListener("click", (event) => {
   const time = `${hr > 12 ? hr % 12 : hr}:${min} ${hr > 12 ? "pm" : "am"}`;
 
   let taskData = {
-    id: Date.now(), //
     fileName: fileInput.files[0].name,
     status: statusChecked.value,
     createdDate: date,
@@ -172,6 +174,10 @@ document.querySelector(".submit-btn").addEventListener("click", (event) => {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 
   addTodo(taskData); 
+
+  fileInput.value = ""
+  let fileNameDisplay = document.getElementById("fileName");
+  fileNameDisplay.innerText="No file chosen";
 
   document.querySelector(".popup").style.cssText = `display:none`;
 
@@ -206,4 +212,13 @@ document.getElementById('searchDocument').addEventListener("input", function() {
       
   });
 });
+
+
+
+
+
+
+
+
+
 
