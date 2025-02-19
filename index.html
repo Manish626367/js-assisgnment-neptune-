@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="left-container">
+       <div class="upper">
+        <div class="logo">
+          <img src="Union.svg" alt="no logo" height="31" width="168" />
+        </div>
+        <div class="pre-profile">
+            <div class="profile">
+                <div class="plogo"><img src="Group 79.png" alt="no image" height="41" width="41" /></div>
+                 
+             
+               <div class="name-div">
+                 <p class="name font">Jessica Thompson</p>
+                 <p class="role">primary user</p>
+               </div>
+               <div class="arrow"> <img  src="Icon Right.png" alt="no image" width="19" height="19"/>
+               </div>
+            </div>
+        
+            <div class="menu">
+            <div class="items">
+                <div class="items-logo">
+                    <img src="home 1.png" alt="">
+                </div>
+                <div class="items-name">Home</div>
+            </div>
+            <div class="items color">
+                <div class="items-logo">
+                    <img src="file-text 1.png" alt="">
+                </div>
+                <div class="items-name">Documents</div>
+            </div>
+            <div class="items">
+                <div class="items-logo">
+                    <img src="message-circle 1.png" alt="">
+                </div>
+                <div class="items-name">Chat with Neptune</div>
+            </div>
+            <div class="items">
+                <div class="items-logo">
+                    <img src="help-circle 1.png" alt="">
+                </div>
+                <div class="items-name">Help</div>
+            </div>
+            <div class="items">
+                <div class="items-logo">
+                    <img src="settings 1.png" alt="">
+                </div>
+                <div class="items-name">Setting</div>
+            </div>
+            
+            </div>
+        </div>
+       </div>
+            <div class="contact-1">
+          <img src="phone 1.png" alt="" height="33" width="33">
+          <div class="div-head-contact">
+            <p class="contact-head"> Having trouble?</p>
+          </div>
+          <div class="div-description-contact">
+            <p class="contact-description">Feel free to contact us and we will always help you through the process.</p>
+          </div>
+          <button class="contact-button">contact us</button>
+        
+            </div>
+        
+      </div>
+    <div class="right-container">
+        
+            <!-- <img src="Breadcrumb (1).png" alt=""> -->
+          <div class="nav-info">
+            <h5>Home</h5>
+            <img src="chevron-right (2).png" alt="img">
+            <h6>Documents</h6>
+          </div>
+        <div class="head">
+            <p>My Document</p>
+            <div class="search-button">
+              <div class="search">
+                <input type="text" id="searchDocument" size="32" placeholder="search documents">
+                <img src="Layer_1 (2).png" alt="img">
+              </div>
+               <button id="addTask" class="add_btn">Add task</button>
+            </div>
+        </div>
+
+        <div class="main-table">
+          <table>
+            <thead id="table-th">
+              <tr>
+                <th><div class="check"><input type="checkbox">
+                  <div class="shap"><img src="Shape.png" alt="" height="4" width="8"></div></div>
+                </th>
+                <th>Document Name</th>
+                <th>Status</th>
+                <th>Last Modified</th>
+                <th></th>
+              </tr>
+            </thead>
+           <tbody id="tableBody">
+            </tbody> 
+          </table>
+        </div>
+    </div>
+    <div class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span> 
+             
+            <p>Select Document </p><br>
+            <div class="file-input-container">
+        
+              <input type="file" id="taskInput"  hidden >
+              <label for="taskInput" class="custom-button" >Choose File</label>
+              <span id="fileName">No file chosen</span>
+            </div><br>
+            <p>Please select Status</p><br>
+            <input type="radio" id="signing" name="status" value="signing">
+            <label for="signing">Needs Signing</label><br>
+    
+            <input type="radio" id="Pending" name="status" value="Pending">
+            <label for="Pending">Pending</label><br>
+    
+            <input type="radio" id="Completed" name="status" value="Completed">
+            <label for="Completed">Completed</label><br><br>
+    
+            <button id="btn" class="submit-btn">Add Task</button>
+        </div>
+        
+    </div>
+     <script src="script.js"></script>
+   
+
+  </body>
+</html>
