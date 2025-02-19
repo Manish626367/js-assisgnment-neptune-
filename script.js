@@ -14,6 +14,7 @@ function addTodo(taskData) {
 
 
   const tr = document.createElement("tr");
+  tr.setAttribute("data-id", taskData.id); //
 
 
   //***************** created a checkbox ********************************//
@@ -49,7 +50,7 @@ function addTodo(taskData) {
   tdStatus.appendChild(statusElement);
   tr.appendChild(tdStatus);
 
-  
+
 
   // *********************** created Modified_at *****************************//
   const tdDate = document.createElement("td");
@@ -111,22 +112,28 @@ document.querySelector(".close-btn").addEventListener("click", () => {
 
 
 //*********** delete *************/
+// ***************** delete functionality ********************************//
 document.querySelector("table").addEventListener("click", (event) => {
   if (event.target.closest(".lastColDeleteBtn")) {
-      event.stopPropagation();
-      
-      let row = event.target.closest("tr");
-      let fileName = row.querySelector(".d-name").innerText; 
+    event.stopPropagation();
 
-      //****************** remove the row from UI *****************//
-      row.remove();
+    let row = event.target.closest("tr");
+    let taskId = Number(row.getAttribute("data-id")); // Ensure it's a number
 
-      // ********************** remove from localStorage*************//
-      let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-      tasks = tasks.filter(task => task.fileName !== fileName);
-      localStorage.setItem("tasks", JSON.stringify(tasks));
+    // Remove the row from the UI
+    row.remove();
+
+    // Remove the task from localStorage
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    let updatedTasks = tasks.filter(task => task.id !== taskId); // Convert to number and filter
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+
+    if (document.querySelector("table tbody").children.length === 0) {
+      document.querySelector(".main-table").style.display = "none";
+    }
   }
 });
+
 
 
  
@@ -152,6 +159,7 @@ document.querySelector(".submit-btn").addEventListener("click", (event) => {
   const time = `${hr > 12 ? hr % 12 : hr}:${min} ${hr > 12 ? "pm" : "am"}`;
 
   let taskData = {
+    id: Date.now(), //
     fileName: fileInput.files[0].name,
     status: statusChecked.value,
     createdDate: date,
