@@ -147,6 +147,8 @@ document.querySelector(".submit-btn").addEventListener("click", (event) => {
   let fileInput = document.getElementById("taskInput");
   let statusChecked = document.querySelector('input[name="status"]:checked');
 
+  
+
   if (!fileInput.files.length) {
     alert("Please select a file.");
     return;
@@ -181,6 +183,10 @@ document.querySelector(".submit-btn").addEventListener("click", (event) => {
   fileInput.value = ""
   let fileNameDisplay = document.getElementById("fileName");
   fileNameDisplay.innerText="No file chosen";
+
+  document.querySelectorAll('input[name="status"]').forEach(radio => {
+    radio.checked = false;
+  });
 
   document.querySelector(".popup").style.cssText = `display:none`;
 
