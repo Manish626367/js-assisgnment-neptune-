@@ -20,10 +20,11 @@ function addTodo(taskData) {
   
   document.querySelector(".main-table").style.display = "table-header-group";
 
-  let { fileName, status, createdDate, createdTime } = taskData;
+  let {id, fileName, status, createdDate, createdTime } = taskData;
 
 
   const tr = document.createElement("tr");
+  tr.setAttribute("data-id", id);
 
 
   //***************** created a checkbox ********************************//
@@ -125,15 +126,16 @@ document.querySelector("table").addEventListener("click", (event) => {
   if (event.target.closest(".lastColDeleteBtn")) {
       event.stopPropagation();
       
+  
       let row = event.target.closest("tr");
-      let fileName = row.querySelector(".d-name").innerText; 
+      let fileId = row.getAttribute("data-id");
 
       //****************** remove the row from UI *****************//
       row.remove();
 
       // ********************** remove from localStorage*************//
       let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-      tasks = tasks.filter(task => task.fileName !== fileName);
+      tasks = tasks.filter(task => task.id !== fileId);
       localStorage.setItem("tasks", JSON.stringify(tasks));
   }
 });
@@ -162,6 +164,7 @@ document.querySelector(".submit-btn").addEventListener("click", (event) => {
   const time = `${hr > 12 ? hr % 12 : hr}:${min} ${hr > 12 ? "pm" : "am"}`;
 
   let taskData = {
+    id:new Date().getTime().toString(), //
     fileName: fileInput.files[0].name,
     status: statusChecked.value,
     createdDate: date,
