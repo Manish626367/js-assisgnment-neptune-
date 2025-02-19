@@ -292,6 +292,11 @@
     justify-content: space-between;
    
   }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
   
   .right-container {
     display: flex;
